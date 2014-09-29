@@ -19,5 +19,6 @@
             "HaiFangHui\\SessionBuffer\\": "src/"
         }
     },
-    "minimum-stability": "stable"
+    "minimum-stability": "stable",
+    "license": "LGPL-2.1"
 }
