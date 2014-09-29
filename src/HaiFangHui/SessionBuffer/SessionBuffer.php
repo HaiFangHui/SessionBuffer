@@ -8,7 +8,7 @@ use Illuminate\Support\Facades\Config;
 
 class SessionBuffer {
     public function push($buffer_name, $variable) {
-        $session_name = "session_buffers.{$buffer_name}";
+        $session_name = $this->getSessionName($buffer_name);
 
         Session::push($session_name, $variable);
 
@@ -19,6 +19,15 @@ class SessionBuffer {
         if (is_array($existing) && count($existing) > $capacity) {
             $this->trim($session_name, $capacity);
         }
+    }
+
+    public function get($buffer_name) {
+        $session_name = $this->getSessionName($buffer_name);
+        return Session::get($session_name);
+    }
+
+    protected function getSessionName($buffer_name) {
+        return "session_buffers.{$buffer_name}";
     }
 
     protected function trim($session_name, $capacity) {
